@@ -1,4 +1,4 @@
-import { Entry } from "./entry.js";
+import type { Entry } from "./entry.js";
 
 export function replay(entries: Entry[]) {
   return entries

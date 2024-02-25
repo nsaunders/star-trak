@@ -1,6 +1,9 @@
 /* eslint-env node */
 module.exports = {
-  extends: ["eslint:recommended"],
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended-type-checked",
+  ],
   plugins: ["@typescript-eslint"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -8,21 +11,8 @@ module.exports = {
     tsconfigRootDir: __dirname,
   },
   root: true,
-  overrides: [
-    {
-      files: ["src/**/*.ts"],
-      extends: ["plugin:@typescript-eslint/recommended-type-checked"],
-      rules: {
-        "@typescript-eslint/consistent-type-imports": "warn",
-      },
-    },
-    {
-      files: ["src/**/*.test.ts"],
-      extends: ["plugin:@typescript-eslint/recommended-type-checked"],
-      rules: {
-        "@typescript-eslint/consistent-type-imports": "warn",
-        "@typescript-eslint/no-floating-promises": "off",
-      },
-    },
-  ],
+  rules: {
+    "@typescript-eslint/consistent-type-imports": "error",
+    "@typescript-eslint/no-floating-promises": "off",
+  },
 };

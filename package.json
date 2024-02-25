@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc --noEmit false",
+    "build": "eslint src && prettier --check . && tsc --noEmit false",
     "start": "tsx src/main.ts",
     "test": "tsx src/test.ts",
     "test.watch": "tsx watch src/test.ts"
@@ -15,6 +15,7 @@
     "@typescript-eslint/eslint-plugin": "^7.0.2",
     "@typescript-eslint/parser": "^7.0.2",
     "eslint": "^8.57.0",
+    "prettier": "^3.2.5",
     "typescript": "^5.3.3"
   },
   "dependencies": {
