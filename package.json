@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build": "tsc --noEmit false",
     "start": "tsx src/main.ts",
     "test": "tsx src/test.ts",
     "test.watch": "tsx watch src/test.ts"

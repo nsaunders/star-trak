@@ -1,0 +1,21 @@
+name: "Star Trak"
+description: "Monitor GitHub stars"
+author: "Nick Saunders"
+branding:
+  icon: "activity"
+  color: "black"
+inputs:
+  path:
+    description:
+      The path to the file where star data will be recorded in JSON format
+    required: false
+    default: ".github/stars.json"
+  repo:
+    description: The repository whose star data to track, in OWNER/NAME format
+    required: true
+  token:
+    description: The token used to access the GitHub repository stargazers API
+    required: true
+runs:
+  using: "node20"
+  main: "dist/main.js"

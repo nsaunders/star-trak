@@ -1,8 +1,12 @@
 {
   "extends": "@tsconfig/strictest",
   "compilerOptions": {
-    "module": "ESNext",
     "target": "ES2017",
-    "moduleResolution": "NodeNext"
-  }
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "noEmit": true,
+    "outDir": "dist"
+  },
+  "include": ["src"],
+  "exclude": ["src/**/*.test.ts"]
 }
