@@ -1,6 +1,6 @@
 # Star Trak
 
-[![Build Status](https://github.com/nsaunders/star-trak/workflows/build/badge.svg)](https://github.com/nsaunders/star-trak/actions?query=workflow%3ACI+branch%3Amaster)
+[![Build Status](https://github.com/nsaunders/star-trak/workflows/build/badge.svg)](https://github.com/nsaunders/star-trak/actions/workflows/build.yml?query=branch%3Amaster)
 [![Latest release](http://img.shields.io/github/release/nsaunders/star-trak.svg)](https://github.com/nsaunders/star-trak/releases)
 
 ## Overview
