@@ -1,0 +1,12 @@
+name: major-version
+
+on:
+  release:
+    types: [published, edited]
+
+jobs:
+  update:
+    runs-on: windows-latest
+
+    steps:
+      - uses: Actions-R-Us/actions-tagger@v2
