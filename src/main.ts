@@ -30,7 +30,13 @@ async function writeEntries(entries: Entry.Entry[]) {
 async function listStargazers(page: number = 1): Promise<string[]> {
   const res = await fetch(
     `https://api.github.com/repos/${inputs.repo}/stargazers?per_page=100&page=${page}`,
+    { headers: { Authorization: `Bearer ${inputs.token}` } },
   );
+  if (!res.ok) {
+    throw new Error(
+      `GitHub API request failed: ${res.status} ${res.statusText}`,
+    );
+  }
   const list = z
     .array(z.object({ login: z.string() }))
     .parse(await res.json())

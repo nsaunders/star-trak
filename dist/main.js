@@ -29912,8 +29912,14 @@ async function writeEntries(entries2) {
 }
 async function listStargazers(page = 1) {
   const res = await fetch(
-    `https://api.github.com/repos/${inputs.repo}/stargazers?per_page=100&page=${page}`
+    `https://api.github.com/repos/${inputs.repo}/stargazers?per_page=100&page=${page}`,
+    { headers: { Authorization: `Bearer ${inputs.token}` } }
   );
+  if (!res.ok) {
+    throw new Error(
+      `GitHub API request failed: ${res.status} ${res.statusText}`
+    );
+  }
   const list = z.array(z.object({ login: z.string() })).parse(await res.json()).map(({ login }) => login);
   if (list.length < 100) {
     return list;

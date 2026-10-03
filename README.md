@@ -15,17 +15,11 @@ service like S3.
 
 ## Getting started
 
-### Personal Access Token
+### Token permissions
 
-You'll first need to create a Personal Access Token (PAT) to allow access to the
-List Stargazers API. Follow
-[these instructions](https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
-to create your PAT with the **public_repo** scope.
-
-Next, add the PAT to your repository's encrypted secrets following
-[these instructions](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository).
-You can choose any name you want; but, if you're looking for a suggestion,
-**GH_ACCESS_TOKEN** works well.
+The built-in `GITHUB_TOKEN` can read stargazers for the current or another
+public repository. Grant it `contents: write` if the workflow also commits the
+updated history file, as in the sample below.
 
 ### Workflow configuration
 
@@ -42,7 +36,7 @@ You'll need to add a step like this to your GitHub Actions workflow file.
   with:
     path: .github/stars.json # default
     repo: ${{ github.repository }}
-    token: ${{ secrets.GH_ACCESS_TOKEN }}
+    token: ${{ github.token }}
 ```
 
 #### How it works
@@ -65,7 +59,7 @@ When this step runs:
 | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
 | **path**  | The path (relative to the workspace) where star data will be written in JSON format. If the file does not exist, then it will be created automatically. Otherwise, new data will be added to it while preserving any existing data. If not specified, this setting defaults to _.github/stars.json_. | optional  |
 | **repo**  | The repository whose stars to monitor in _&lt;owner&gt;/&lt;repository&gt;_ format. A typical value, obtained from the [github context](https://docs.github.com/en/actions/learn-github-actions/contexts#github-context), would be `${{ github.repository }}`.                                       | required  |
-| **token** | The PAT used to access the List Stargazers API                                                                                                                                                                                                                                                       | required  |
+| **token** | The GitHub token used to access the List Stargazers API                                                                                                                                                                                                                                              | required  |
 
 #### Recommendations
 
@@ -91,6 +85,9 @@ on:
   schedule:
     - cron: "45 23 * * 0"
 
+permissions:
+  contents: write
+
 jobs:
   update:
     name: update
@@ -107,7 +104,7 @@ jobs:
         with:
           path: ${{ env.STARS_PATH }}
           repo: ${{ github.repository }}
-          token: ${{ secrets.GH_ACCESS_TOKEN }}
+          token: ${{ github.token }}
 
       - uses: EndBug/add-and-commit@v9
         with:
